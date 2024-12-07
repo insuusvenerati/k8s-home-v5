@@ -23,41 +23,6 @@ spec:
         annotations:
           reloader.stakater.com/auto: "true"
         containers:
-          exportarr:
-            enabled: true
-            args:
-              - sonarr
-            env:
-              - name: URL
-                value: http://sonarr:8989
-              - name: PORT
-                value: 7879
-              - name: FORM_AUTH
-                value: false
-              - name: CONFIG
-                value: /config/config.xml
-              - name: AUTH_PASSWORD
-                valueFrom:
-                  secretKeyRef:
-                    name: sonarr-apikey
-                    key: AUTH_PASSWORD
-              - name: AUTH_USERNAME
-                valueFrom:
-                  secretKeyRef:
-                    name: sonarr-apikey
-                    key: AUTH_USERNAME
-              - name: ENABLE_ADDITIONAL_METRICS
-                value: true
-              - name: DISABLE_SSL_VERIFY
-                value: true
-              - name: APIKEY
-                valueFrom:
-                  secretKeyRef:
-                    name: sonarr-apikey
-                    key: APIKEY
-            image:
-              repository: ghcr.io/onedr0p/exportarr
-              tag: v2.0.1
           sonarr:
             env:
               - name: TZ
@@ -109,38 +74,7 @@ spec:
       data:
         enabled: true
         existingClaim: media-pvc-ssd
-      custom-services:
-        enabled: false
-        type: persistentVolumeClaim
-        storageClass: openebs-hostpath
-        accessMode: ReadWriteOnce
-        size: 1Gi
-        advancedMounts:
-          main:
-            sonarr:
-              - path: /custom-services.d
-                readOnly: false
-      custom-cont-init:
-        enabled: false
-        type: configMap
-        name: sonarr-scripts
-        advancedMounts:
-          main:
-            sonarr:
-              - path: /custom-cont-init.d
-                readOnly: false
     service:
-      exportarr:
-        controller: main
-        enabled: true
-        ports:
-          metrics:
-            appProtocol: http
-            enabled: true
-            port: 7879
-            primary: false
-            protocol: HTTP
-        primary: false
       sonarr:
         controller: main
         enabled: true
@@ -152,13 +86,3 @@ spec:
             protocol: HTTP
     serviceAccount:
       create: true
-    serviceMonitor:
-      exportarr:
-        enabled: true
-        endpoints:
-          - interval: 4m
-            path: /metrics
-            port: metrics
-            scheme: http
-            scrapeTimeout: 90s
-        serviceName: sonarr-exportarr
