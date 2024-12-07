@@ -1,0 +1,182 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: radarr
+  namespace: default
+spec:
+  chart:
+    spec:
+      chart: app-template
+      reconcileStrategy: ChartVersion
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s
+        namespace: flux-system
+      version: 3.5.1
+  interval: 12h0m0s
+  releaseName: radarr
+  targetNamespace: default
+  install:
+    remediation:
+      retries: 5
+  upgrade:
+    remediation:
+      retries: 5
+  values:
+    defaultPodOptions:
+      automountServiceAccountToken: false
+    controllers:
+      main:
+        annotations:
+          reloader.stakater.com/auto: "true"
+        containers:
+          exportarr:
+            enabled: true
+            args:
+              - radarr
+            env:
+              - name: URL
+                value: http://radarr:7878
+              - name: PORT
+                value: 7879
+              - name: ENABLE_ADDITIONAL_METRICS
+                value: true
+              - name: DISABLE_SSL_VERIFY
+                value: true
+              - name: CONFIG
+                value: /config/config.xml
+              - name: AUTH_PASSWORD
+                valueFrom:
+                  secretKeyRef:
+                    name: radarr-secret
+                    key: AUTH_PASSWORD
+              - name: AUTH_USERNAME
+                valueFrom:
+                  secretKeyRef:
+                    name: radarr-secret
+                    key: AUTH_USERNAME
+            image:
+              repository: ghcr.io/onedr0p/exportarr
+              tag: v2.0.1
+          radarr:
+            env:
+              - name: TZ
+                value: America/Chicago
+              - name: PUID
+                value: 1000
+              - name: PGID
+                value: 1000
+            image:
+              repository: linuxserver/radarr
+              tag: nightly-version-5.15.0.9397
+            probes:
+              liveness:
+                enabled: true
+                custom: false
+                type: TCP
+                spec:
+                  initialDelaySeconds: 5
+                  periodSeconds: 10
+                  timeoutSeconds: 1
+                  failureThreshold: 5
+              readiness:
+                enabled: true
+                custom: false
+                type: TCP
+                spec:
+                  initialDelaySeconds: 5
+                  periodSeconds: 10
+                  timeoutSeconds: 1
+                  failureThreshold: 5
+            resources:
+              requests:
+                cpu: 1000m
+                memory: 500m
+        enabled: true
+        type: deployment
+    global:
+      fullnameOverride: radarr
+      labels:
+        app: radarr
+    ingress:
+      radarr:
+        annotations:
+          cert-manager.io/cluster-issuer: letsencrypt-production
+          nginx.ingress.kubernetes.io/enable-opentelemetry: "true"
+          nginx.ingress.kubernetes.io/otel-service-name: radarr
+          nginx.ingress.kubernetes.io/service-upstream: "false"
+        className: internal
+        enabled: true
+        hosts:
+          - host: radarr.internal.${SECRET_DOMAIN}
+            paths:
+              - path: /
+                pathType: Prefix
+                service:
+                  identifier: radarr
+        tls:
+          - hosts:
+              - radarr.internal.${SECRET_DOMAIN}
+            secretName: radarr-tls
+    persistence:
+      config:
+        accessMode: ReadWriteOnce
+        enabled: true
+        size: 1Gi
+        storageClass: nfs-client-ssd
+        type: persistentVolumeClaim
+      data:
+        enabled: true
+        existingClaim: media-pvc-ssd
+      custom-services:
+        enabled: false
+        type: persistentVolumeClaim
+        storageClass: openebs-hostpath
+        accessMode: ReadWriteOnce
+        size: 1Gi
+        advancedMounts:
+          main:
+            radarr:
+              - path: /custom-services.d
+                readOnly: false
+      custom-cont-init:
+        enabled: false
+        type: configMap
+        name: script-init
+        advancedMounts:
+          main:
+            radarr:
+              - path: /custom-cont-init.d
+                readOnly: false
+    service:
+      exportarr:
+        controller: main
+        enabled: true
+        ports:
+          metrics:
+            appProtocol: http
+            enabled: true
+            port: 7879
+            primary: false
+            protocol: HTTP
+        primary: false
+      radarr:
+        controller: main
+        enabled: true
+        ports:
+          http:
+            appProtocol: http
+            enabled: true
+            port: 7878
+            protocol: HTTP
+    serviceMonitor:
+      exportarr:
+        enabled: true
+        endpoints:
+          - interval: 4m
+            path: /metrics
+            port: metrics
+            scheme: http
+            scrapeTimeout: 90s
+        serviceName: radarr-exportarr

@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: script-init
+  namespace: default
+data:
+  scripts_init.bash: |
+    #!/usr/bin/with-contenv bash
+    curl https://raw.githubusercontent.com/RandomNinjaAtk/arr-scripts/main/radarr/setup.bash | bash
+    exit

@@ -1,0 +1,171 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: tubearchivist
+  namespace: default
+spec:
+  chart:
+    spec:
+      chart: app-template
+      reconcileStrategy: ChartVersion
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s
+        namespace: flux-system
+      version: 3.4.0
+  interval: 1h0m0s
+  releaseName: tubearchivist
+  targetNamespace: default
+  maxHistory: 2
+  values:
+    global:
+      fullnameOverride: tubearchivist
+    controllers:
+      main:
+        enabled: true
+        type: deployment
+        replicas: 1
+        containers:
+          main:
+            image:
+              repository: bbilly1/tubearchivist
+              tag: unstable
+              pullPolicy: Always
+            env:
+              - name: TZ
+                value: America/Chicago
+              - name: PUID
+                value: "1000"
+              - name: PGID
+                value: "1000"
+              - name: TA_HOST
+                value: tubearchivist.internal.${SECRET_DOMAIN}
+              - name: REDIS_HOST
+                value: tubearchivist-redis
+              - name: ES_URL
+                value: http://tubearchivist-elasticsearch:9200
+            envFrom:
+              - secret: ta-creds
+      elasticsearch:
+        enabled: true
+        type: deployment
+        replicas: 1
+        containers:
+          elasticsearch:
+            image:
+              repository: bbilly1/tubearchivist-es
+              tag: latest
+            env:
+              - name: ES_JAVA_OPTS
+                value: -Xms512m -Xmx512m
+              - name: "discovery.type"
+                value: single-node
+              - name: "path.repo"
+                value: /usr/share/elasticsearch/data/snapshot
+              - name: "xpack.security.enabled"
+                value: "true"
+            envFrom:
+              - secret: ta-creds
+            resources:
+              limits:
+                cpu: 1000m
+                memory: 1024Mi
+              requests:
+                cpu: 500m
+                memory: 512Mi
+      redis:
+        enabled: true
+        type: deployment
+        replicas: 1
+        containers:
+          redis:
+            image:
+              repository: redis/redis-stack-server
+              tag: latest
+    service:
+      main:
+        enabled: true
+        controller: main
+        ports:
+          http:
+            enabled: true
+            primary: true
+            port: 8000
+      elasticsearch:
+        enabled: true
+        controller: elasticsearch
+        ports:
+          http:
+            enabled: true
+            primary: true
+            port: 9200
+      redis:
+        enabled: true
+        controller: redis
+        ports:
+          tcp-redis:
+            enabled: true
+            primary: true
+            port: 6379
+    ingress:
+      main:
+        enabled: true
+        className: internal
+        annotations:
+          cert-manager.io/cluster-issuer: letsencrypt-production
+        hosts:
+          - host: tubearchivist.internal.${SECRET_DOMAIN}
+            paths:
+              - path: /
+                service:
+                  identifier: main
+                  port: http
+        tls:
+          - secretName: tubearchivist-tls
+            hosts:
+              - tubearchivist.internal.${SECRET_DOMAIN}
+    serviceMonitor:
+      main:
+        enabled: false
+        serviceName: '{{ include "bjw-s.common.lib.chart.names.fullname" $ }}'
+        endpoints:
+          - port: http
+            scheme: http
+            path: /metrics
+            interval: 1m
+            scrapeTimeout: 10s
+    persistence:
+      cache:
+        enabled: true
+        accessMode: ReadWriteOnce
+        storageClass: openebs-hostpath
+        size: 5Gi
+      youtube:
+        enabled: true
+        existingClaim: media-pvc-ssd
+        globalMounts:
+          - path: /youtube
+            subPath: youtube
+      elasticsearch:
+        enabled: true
+        type: persistentVolumeClaim
+        accessMode: ReadWriteOnce
+        storageClass: openebs-hostpath
+        size: 2Gi
+        advancedMounts:
+          elasticsearch:
+            elasticsearch:
+              - path: "/usr/share/elasticsearch/data"
+                readOnly: false
+      redis:
+        enabled: true
+        type: persistentVolumeClaim
+        accessMode: ReadWriteOnce
+        storageClass: openebs-hostpath
+        size: 1Gi
+        advancedMounts:
+          redis:
+            redis:
+              - path: "/data"
+                readOnly: false

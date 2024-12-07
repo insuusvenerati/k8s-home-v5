@@ -1,0 +1,27 @@
+apiVersion: notification.toolkit.fluxcd.io/v1beta3
+kind: Provider
+metadata:
+  name: discord
+  namespace: default
+spec:
+  type: discord
+  secretRef:
+    name: discord-webhook
+---
+apiVersion: notification.toolkit.fluxcd.io/v1beta3
+kind: Alert
+metadata:
+  name: discord
+  namespace: default
+spec:
+  summary: "Stuff's messed up"
+  providerRef:
+    name: discord
+  eventSeverity: error
+  eventSources:
+    - kind: HelmRelease
+      name: '*'
+      namespace: default
+    - kind: Kustomization
+      name: '*'
+      namespace: flux-system

@@ -1,0 +1,69 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: glances-config
+  namespace: default
+data:
+  glance.yml: |
+    pages:
+      - name: Home
+        columns:
+          - size: small
+            widgets:
+              - type: bookmarks
+                groups:
+                  - title: Services
+                    links:
+                      - title: Proxmox
+                        url: https://proxmox.stiforr.com
+                      - title: OPNSense
+                        url: https://opnsense.stiforr.com
+                  - title: Entertainment
+                    color: 10 70 50
+                    links:
+                      - title: Netflix
+                        url: https://www.netflix.com/
+                      - title: YouTube
+                        url: https://www.youtube.com/
+                  - title: Social
+                    color: 200 50 50
+                    links:
+                      - title: Reddit
+                        url: https://www.reddit.com/
+              - type: calendar
+
+          - size: full
+            widgets:
+              - type: search
+                search-engine: duckduckgo
+                bangs:
+                  - title: YouTube
+                    shortcut: "!yt"
+                    url: https://www.youtube.com/results?search_query={QUERY}
+              - type: videos
+                channels:
+                  - UC1D3yD4wlPMico0dss264XA # NileBlue
+                  - UC7_YxT-KID8kRbqZo7MyscQ # Markiplier
+              - type: reddit
+                subreddit: selfhosted
+
+          - size: small
+            widgets:
+              - type: weather
+                location: ${SECRET_LOCATION}
+
+      - name: Grafana
+        columns:
+          - size: full
+            widgets:
+              - type: iframe
+                source: https://grafana.internal.${SECRET_DOMAIN}/d/WURH98Y4k/media-dashboard?from=now-24h&to=now&timezone=browser&var-DS_PROMETHEUS=prometheus&var-prowlarr_instance=$__all&var-sabnzbd_instance=$__all&var-radarr_instance=$__all&var-sonarr_instance=$__all&var-lidarr_instance=$__all&var-readarr_instance=$__all&var-bazarr_instance=$__all&refresh=30s&kiosk
+                height: 800
+
+      - name: Homepage
+        columns:
+          - size: full
+            widgets:
+              - type: iframe
+                source: https://homepage.internal.${SECRET_DOMAIN}
+                height: 800

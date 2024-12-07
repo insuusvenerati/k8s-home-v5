@@ -1,0 +1,130 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: prowlarr
+  namespace: default
+spec:
+  chart:
+    spec:
+      chart: app-template
+      reconcileStrategy: ChartVersion
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s
+        namespace: flux-system
+      version: 3.4.0
+  interval: 12h0m0s
+  releaseName: prowlarr
+  targetNamespace: default
+  values:
+    controllers:
+      main:
+        containers:
+          exportarr:
+            enabled: true
+            args:
+              - prowlarr
+            env:
+              URL: http://prowlarr:9696
+              PORT: 9697
+              CONFIG: /config/config.xml
+              FORM_AUTH: true
+              ENABLE_ADDITIONAL_METRICS: true
+              DISABLE_SSL_VERIFY: true
+              AUTH_PASSWORD:
+                valueFrom:
+                  secretKeyRef:
+                    name: prowlarr-apikey
+                    key: AUTH_PASSWORD
+              AUTH_USERNAME:
+                valueFrom:
+                  secretKeyRef:
+                    name: prowlarr-apikey
+                    key: AUTH_USERNAME
+            envFrom:
+              - secret: prowlarr-apikey
+            image:
+              repository: ghcr.io/onedr0p/exportarr
+              tag: v2.0.1
+          prowlarr:
+            env:
+              - name: TZ
+                value: America/Chicago
+              - name: PUID
+                value: 1000
+              - name: PGID
+                value: 1000
+            image:
+              repository: linuxserver/prowlarr
+              tag: 1.25.4
+        enabled: true
+        type: deployment
+    global:
+      fullnameOverride: prowlarr
+      labels:
+        app: prowlarr
+    ingress:
+      prowlarr:
+        annotations:
+          cert-manager.io/cluster-issuer: letsencrypt-production
+          nginx.ingress.kubernetes.io/enable-opentelemetry: "true"
+          nginx.ingress.kubernetes.io/otel-service-name: prowlarr
+          nginx.ingress.kubernetes.io/service-upstream: "false"
+        className: internal
+        enabled: true
+        hosts:
+          - host: prowlarr.internal.${SECRET_DOMAIN}
+            paths:
+              - path: /
+                pathType: Prefix
+                service:
+                  identifier: prowlarr
+        tls:
+          - hosts:
+              - prowlarr.internal.${SECRET_DOMAIN}
+            secretName: prowlarr-tls
+    persistence:
+      config:
+        accessMode: ReadWriteOnce
+        enabled: true
+        size: 1Gi
+        storageClass: nfs-client-ssd
+        type: persistentVolumeClaim
+      data:
+        enabled: true
+        existingClaim: media-pvc-ssd
+    service:
+      exportarr:
+        controller: main
+        enabled: true
+        ports:
+          metrics:
+            appProtocol: http
+            enabled: true
+            port: 9697
+            primary: false
+            protocol: HTTP
+        primary: false
+      prowlarr:
+        controller: main
+        enabled: true
+        ports:
+          http:
+            appProtocol: http
+            enabled: true
+            port: 9696
+            protocol: HTTP
+    serviceAccount:
+      create: true
+    serviceMonitor:
+      exportarr:
+        enabled: true
+        endpoints:
+          - interval: 30s
+            path: /metrics
+            port: metrics
+            scheme: http
+            scrapeTimeout: 10s
+            scrapeInterval: 30s
+        serviceName: prowlarr-exportarr

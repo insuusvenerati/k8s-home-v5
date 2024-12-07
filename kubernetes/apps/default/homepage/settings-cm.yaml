@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: home-settings
+  namespace: default
+  labels:
+    app.kubernetes.io/name: homepage
+data:
+  bookmarks.yaml: ""
+  docker.yaml: ""
+  kubernetes.yaml: |
+    mode: cluster
+  services.yaml: ""
+  settings.yaml: |
+    title: Home
+  widgets.yaml: ""

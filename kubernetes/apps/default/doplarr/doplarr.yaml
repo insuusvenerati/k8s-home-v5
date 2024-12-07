@@ -1,0 +1,65 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: doplarr
+  namespace: default
+spec:
+  chart:
+    spec:
+      chart: app-template
+      reconcileStrategy: ChartVersion
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s
+        namespace: flux-system
+      version: 3.4.0
+  interval: 6h0m0s
+  releaseName: doplarr
+  targetNamespace: default
+  values:
+    controllers:
+      main:
+        containers:
+          doplarr:
+            env:
+              DISCORD__REQUESTED_MSG_STYLE: :embed
+              OVERSEERR__URL: http://overseerr:80
+              OVERSEERR__API:
+                valueFrom:
+                  secretKeyRef:
+                    name: doplarr-secret
+                    key: API_KEY
+              OVERSEERR__DEFAULT_ID: '126149318766886912'
+#              RADARR__API:
+#                valueFrom:
+#                  secretKeyRef:
+#                    key: APIKEY
+#                    name: radarr-secret
+#              RADARR__QUALITY_PROFILE: HD - 720p/1080p
+#              RADARR__ROOTFOLDER: /data/media/movies
+#              RADARR__URL: http://radarr:7878
+#              SONARR__API:
+#                valueFrom:
+#                  secretKeyRef:
+#                    key: APIKEY
+#                    name: sonarr-apikey
+#              SONARR__QUALITY_PROFILE: HD - 720p/1080p
+#              SONARR__ROOTFOLDER: /data/media/tv
+#              SONARR__URL: http://sonarr:8989
+              DISCORD__TOKEN:
+                valueFrom:
+                  secretKeyRef:
+                    key: TOKEN
+                    name: doplarr-secret
+            image:
+              repository: ghcr.io/kiranshila/doplarr
+              tag: v3.6.3
+        enabled: true
+        type: deployment
+    global:
+      fullnameOverride: doplarr
+      labels:
+        app: doplarr
+    serviceAccount:
+      create: false

@@ -1,0 +1,28 @@
+apiVersion: v1
+kind: Secret
+metadata:
+    name: discord-webhook
+    namespace: defafult
+type: Opaque
+stringData:
+    address: ENC[AES256_GCM,data:sLNGuNeyg1VptRKnBPmDYRz3BOKTwg8WCO3OUnXP8gSooaQ9jvQIuRLn+yAG5k9yTCiiIj3CewmpApfl7y8LBMaDt4GB+v1wtsvkjRCoredNs1tkF0AYVfOBA7di76otPwwrDNrpKyQuad7icA4IPIZuS/BpSw/enQ==,iv:sj5CEJ2jJzU8zpD86iPUMep8Jbt1LFFo7ZMw7wsz6/o=,tag:DdDuK7/e4+1DD4E0hCoBTg==,type:str]
+sops:
+    kms: []
+    gcp_kms: []
+    azure_kv: []
+    hc_vault: []
+    age:
+        - recipient: age1m3cj7a2auwuanpqtugv29834mmlwqzcd43tjnczqwts3k9tgv35q86xkl7
+          enc: |
+            -----BEGIN AGE ENCRYPTED FILE-----
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBTQTJpbUx5NWVCUmVEc1Nt
+            ZW5MejVuVExJVlUrWHhhTWN4Z2tOU2d6ZzFjClVreWt2cUtqTmtTY25QOWpycEZY
+            OHpod1ppL2RlSHFoUDZGZ0Rmc0JNUzAKLS0tIDE0eTJ5YU1VMmRUaXM0L2l3TTVx
+            VlpvS3NhSEd2ZTB5eThoQURuQmtTUlkKL3LwjRZ5NvIa2exFR4XdScj8+ntbNwHH
+            pXy+f4EioBFcNH3n80py6OMluAMC9DLYGM5v2O0gp+IP2jLkS5TfmQ==
+            -----END AGE ENCRYPTED FILE-----
+    lastmodified: "2024-12-07T23:02:50Z"
+    mac: ENC[AES256_GCM,data:r5LJy9NMi8Wl7pPpexmLW5fLVWjq513SuumTIKM5atDm0esHJFJI5asVnZeluCmCT5G/SARy9YbTH57KgDiaxv3JYaALcQTX0pBliFb9AriHdUMP8W2pPCMrpT+PJT7b7sy+n5o6QRa/AtEkU2BavsNw/Ykcly9HYkWHyMXpS84=,iv:BpAaNVaSFQm0IDEMKy+3b4eFhw3Q5O/ydz2Gii84eSY=,tag:4UPUoBIc2Ulc4/F2LOdrCw==,type:str]
+    pgp: []
+    encrypted_regex: ^(data|stringData)$
+    version: 3.9.1

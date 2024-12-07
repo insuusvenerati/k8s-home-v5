@@ -1,0 +1,18 @@
+---
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  - ./pvc-ssd.yaml
+  - ./sonarr
+  - ./overseerr
+  - ./nfs-subdir-external-ssd
+  - ./tubearchivist
+  - ./tautulli
+  - ./radarr
+  - ./prowlarr
+  - ./filebrowser
+  - ./doplarr
+  - ./homepage
+  - ./flux-alerts.yaml
+  - ./discord-webhook.sops.yaml
+  - ./glances

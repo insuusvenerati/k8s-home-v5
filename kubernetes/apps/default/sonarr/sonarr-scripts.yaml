@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: sonarr-scripts
+  namespace: default
+data:
+  scripts_init.bash: |
+    #!/usr/bin/with-contenv bash
+    curl https://raw.githubusercontent.com/RandomNinjaAtk/arr-scripts/main/sonarr/setup.bash | bash
