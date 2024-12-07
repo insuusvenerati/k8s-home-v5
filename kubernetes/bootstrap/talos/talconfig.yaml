@@ -40,12 +40,6 @@ nodes:
         mtu: 1500
         vip:
           ip: "192.168.1.10"
-    extensionServices:
-      - name: tailscale
-        configFiles:
-        environment:
-          - TS_AUTHKEY=${TS_AUTHKEY}
-          - TS_ROUTES=${TS_ROUTES}
     patches:
       - "@./patches/controller/api-access.yaml"
       - "@./patches/controller/cluster.yaml"
@@ -69,6 +63,6 @@ controlPlane:
   patches:
     - "@./patches/controller/api-access.yaml"
     - "@./patches/controller/cluster.yaml"
-    - "@./patches/controller/disable-admission-controller.yaml"
+#    - "@./patches/controller/disable-admission-controller.yaml"
     - "@./patches/controller/etcd.yaml"
 
