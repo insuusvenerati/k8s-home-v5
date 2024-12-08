@@ -2,7 +2,7 @@ apiVersion: v1
 kind: Secret
 metadata:
     name: discord-webhook
-    namespace: defafult
+    namespace: default
 type: Opaque
 stringData:
     address: ENC[AES256_GCM,data:sLNGuNeyg1VptRKnBPmDYRz3BOKTwg8WCO3OUnXP8gSooaQ9jvQIuRLn+yAG5k9yTCiiIj3CewmpApfl7y8LBMaDt4GB+v1wtsvkjRCoredNs1tkF0AYVfOBA7di76otPwwrDNrpKyQuad7icA4IPIZuS/BpSw/enQ==,iv:sj5CEJ2jJzU8zpD86iPUMep8Jbt1LFFo7ZMw7wsz6/o=,tag:DdDuK7/e4+1DD4E0hCoBTg==,type:str]
