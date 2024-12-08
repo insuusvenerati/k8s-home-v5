@@ -31,34 +31,6 @@ spec:
         annotations:
           reloader.stakater.com/auto: "true"
         containers:
-          exportarr:
-            enabled: true
-            args:
-              - radarr
-            env:
-              - name: URL
-                value: http://radarr:7878
-              - name: PORT
-                value: 7879
-              - name: ENABLE_ADDITIONAL_METRICS
-                value: true
-              - name: DISABLE_SSL_VERIFY
-                value: true
-              - name: CONFIG
-                value: /config/config.xml
-              - name: AUTH_PASSWORD
-                valueFrom:
-                  secretKeyRef:
-                    name: radarr-secret
-                    key: AUTH_PASSWORD
-              - name: AUTH_USERNAME
-                valueFrom:
-                  secretKeyRef:
-                    name: radarr-secret
-                    key: AUTH_USERNAME
-            image:
-              repository: ghcr.io/onedr0p/exportarr
-              tag: v2.0.1
           radarr:
             env:
               - name: TZ
@@ -129,38 +101,7 @@ spec:
       data:
         enabled: true
         existingClaim: media-pvc-ssd
-      custom-services:
-        enabled: false
-        type: persistentVolumeClaim
-        storageClass: openebs-hostpath
-        accessMode: ReadWriteOnce
-        size: 1Gi
-        advancedMounts:
-          main:
-            radarr:
-              - path: /custom-services.d
-                readOnly: false
-      custom-cont-init:
-        enabled: false
-        type: configMap
-        name: script-init
-        advancedMounts:
-          main:
-            radarr:
-              - path: /custom-cont-init.d
-                readOnly: false
     service:
-      exportarr:
-        controller: main
-        enabled: true
-        ports:
-          metrics:
-            appProtocol: http
-            enabled: true
-            port: 7879
-            primary: false
-            protocol: HTTP
-        primary: false
       radarr:
         controller: main
         enabled: true
@@ -170,13 +111,3 @@ spec:
             enabled: true
             port: 7878
             protocol: HTTP
-    serviceMonitor:
-      exportarr:
-        enabled: true
-        endpoints:
-          - interval: 4m
-            path: /metrics
-            port: metrics
-            scheme: http
-            scrapeTimeout: 90s
-        serviceName: radarr-exportarr
