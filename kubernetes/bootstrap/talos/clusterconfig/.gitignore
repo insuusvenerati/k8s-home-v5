@@ -1,2 +1,3 @@
 home-kubernetes-controller.yaml
 talosconfig
+home-kubernetes-k8s-controller.yaml
