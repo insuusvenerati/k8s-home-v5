@@ -15,3 +15,26 @@ resources:
   - ./external-dns.yaml
   - ./ingress-nginx.yaml
   - ./k8s-gateway.yaml
+#  - ./plex.yaml
+  - ./k8s-at-home.yaml
+#  - ./kiali.yaml
+  - ./nfs-subdir-external.yaml
+#  - ./istio.yaml
+#  - ./portainer.yaml
+  - ./grafana.yaml
+#  - ./jaeger.yaml
+#  - ./komodor.yaml
+#  - ./linkerd.yaml
+#  - ./otel.yaml
+#  - ./uptrace.yaml
+#  - ./linkerd-smi.yaml
+  - ./onechart.yaml
+#  - ./authentik.yaml
+#  - ./kubeshark.yaml
+#  - ./rocket-chat.yaml
+  - ./robusta.yaml
+#  - ./mailu.yaml
+  - ./csi-driver-nfs.yaml
+  - ./kubeflame.yaml
+  - ./checkmk.yaml
+  - ./budibase.yaml
