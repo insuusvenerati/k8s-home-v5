@@ -62,11 +62,13 @@ spec:
         enabled: true
         size: 1Gi
         type: persistentVolumeClaim
+        storageClass: openebs-hostpath
       database:
         accessMode: ReadWriteOnce
         enabled: true
         size: 2Gi
         type: persistentVolumeClaim
+        storageClass: openebs-hostpath
       srv:
         enabled: true
         existingClaim: media-pvc-ssd
