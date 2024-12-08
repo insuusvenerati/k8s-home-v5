@@ -23,7 +23,7 @@ cniConfig:
   name: none
 
 nodes:
-  - hostname: "controller"
+  - hostname: "k8s-controller"
     ipAddress: "192.168.1.11"
     installDisk: "/dev/sda"
     talosImageURL: factory.talos.dev/installer/7d4c31cbd96db9f90c874990697c523482b2bae27fb4631d5583dcd9c281b1ff
@@ -46,11 +46,6 @@ nodes:
         environment:
           - TS_AUTHKEY=${TS_AUTHKEY}
           - TS_ROUTES=${TS_ROUTES}
-    patches:
-      - "@./patches/controller/api-access.yaml"
-      - "@./patches/controller/cluster.yaml"
-      - "@./patches/controller/disable-admission-controller.yaml"
-      - "@./patches/controller/etcd.yaml"
 
 # Global patches
 patches:
