@@ -69,7 +69,7 @@ spec:
         accessMode: ReadWriteOnce
         enabled: true
         size: 1Gi
-        storageClass: nfs-client-ssd
+        storageClass: openebs-hostpath
         type: persistentVolumeClaim
       data:
         enabled: true
