@@ -15,9 +15,13 @@ data:
                   - title: Services
                     links:
                       - title: Proxmox
-                        url: https://proxmox.stiforr.com
-                      - title: OPNSense
-                        url: https://opnsense.stiforr.com
+                        url: https://pve.stiforr.lan
+                      - title: Sonarr
+                        url: https://sonarr.internal.stiforr.com
+                      - title: Radarr
+                        url: https://radarr.internal.stiforr.com
+                      - title: Prowlarr
+                        url: https://prowlarr.internal.stiforr.com
                   - title: Entertainment
                     color: 10 70 50
                     links:

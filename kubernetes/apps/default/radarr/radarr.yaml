@@ -41,7 +41,7 @@ spec:
                 value: 1000
             image:
               repository: linuxserver/radarr
-              tag: nightly-version-5.15.0.9397
+              tag: 5.15.1
             probes:
               liveness:
                 enabled: true
