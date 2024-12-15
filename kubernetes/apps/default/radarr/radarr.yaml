@@ -101,6 +101,9 @@ spec:
       data:
         enabled: true
         existingClaim: media-pvc-ssd
+      downloads:
+        enabled: true
+        existingClaim: downloads-pvc-ssd
     service:
       radarr:
         controller: main
