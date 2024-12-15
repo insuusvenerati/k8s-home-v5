@@ -30,7 +30,7 @@ spec:
           glances:
             image:
               repository: glanceapp/glance
-              tag: v0.6.2
+              tag: v0.6.3
             args:
               - --config
               - /config/glance.yml
