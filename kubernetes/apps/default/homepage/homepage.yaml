@@ -37,7 +37,7 @@ spec:
                 value: 1000
             image:
               repository: ghcr.io/gethomepage/homepage
-              tag: v0.9.13
+              tag: v0.10.6
         enabled: true
         type: deployment
         annotations:
