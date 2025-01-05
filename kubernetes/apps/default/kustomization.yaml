@@ -16,3 +16,4 @@ resources:
   - ./flux-alerts.yaml
   - ./discord-webhook.sops.yaml
   - ./glances
+  - ./bazarr
