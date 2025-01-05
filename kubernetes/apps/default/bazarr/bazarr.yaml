@@ -50,7 +50,7 @@ spec:
               - path: /
                 pathType: Prefix
                 service:
-                  name: main
+                  identifier: main
         tls:
           - secretName: bazarr-tls
             hosts:
