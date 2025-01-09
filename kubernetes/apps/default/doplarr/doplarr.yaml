@@ -20,6 +20,8 @@ spec:
   values:
     controllers:
       main:
+        annotations:
+          secret.reloader.stakater.com/reload: "doplarr-secret"
         containers:
           doplarr:
             env:
@@ -31,22 +33,6 @@ spec:
                     name: doplarr-secret
                     key: API_KEY
               OVERSEERR__DEFAULT_ID: '126149318766886912'
-#              RADARR__API:
-#                valueFrom:
-#                  secretKeyRef:
-#                    key: APIKEY
-#                    name: radarr-secret
-#              RADARR__QUALITY_PROFILE: HD - 720p/1080p
-#              RADARR__ROOTFOLDER: /data/media/movies
-#              RADARR__URL: http://radarr:7878
-#              SONARR__API:
-#                valueFrom:
-#                  secretKeyRef:
-#                    key: APIKEY
-#                    name: sonarr-apikey
-#              SONARR__QUALITY_PROFILE: HD - 720p/1080p
-#              SONARR__ROOTFOLDER: /data/media/tv
-#              SONARR__URL: http://sonarr:8989
               DISCORD__TOKEN:
                 valueFrom:
                   secretKeyRef:
