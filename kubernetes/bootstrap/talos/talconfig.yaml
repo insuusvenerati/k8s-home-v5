@@ -15,6 +15,9 @@ clusterSvcNets:
 
 additionalApiServerCertSans: &sans
   - "192.168.1.10"
+  - "100.91.112.9"
+  - "controller-2"
+  - "controller-2.pigeon-yo.ts.net"
   - "127.0.0.1"
 additionalMachineCertSans: *sans
 
@@ -42,7 +45,6 @@ nodes:
           ip: "192.168.1.10"
     extensionServices:
       - name: tailscale
-        configFiles:
         environment:
           - TS_AUTHKEY=${TS_AUTHKEY}
           - TS_ROUTES=${TS_ROUTES}
