@@ -29,7 +29,7 @@ spec:
             image:
               pullPolicy: IfNotPresent
               repository: ghcr.io/tautulli/tautulli
-              tag: v2.15.0
+              tag: v2.15.1
             probes:
               liveness:
                 enabled: true
