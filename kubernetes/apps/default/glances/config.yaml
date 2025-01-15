@@ -15,7 +15,7 @@ data:
                   - title: Services
                     links:
                       - title: Proxmox
-                        url: https://pve.stiforr.lan
+                        url: https://pve.stiforr.lan:8006
                       - title: Sonarr
                         url: https://sonarr.internal.stiforr.com
                       - title: Radarr
@@ -25,8 +25,6 @@ data:
                   - title: Entertainment
                     color: 10 70 50
                     links:
-                      - title: Netflix
-                        url: https://www.netflix.com/
                       - title: YouTube
                         url: https://www.youtube.com/
                   - title: Social
@@ -56,18 +54,10 @@ data:
               - type: weather
                 location: ${SECRET_LOCATION}
 
-      - name: Grafana
+      - name: Cloudron
         columns:
           - size: full
             widgets:
               - type: iframe
-                source: https://grafana.internal.${SECRET_DOMAIN}/d/WURH98Y4k/media-dashboard?from=now-24h&to=now&timezone=browser&var-DS_PROMETHEUS=prometheus&var-prowlarr_instance=$__all&var-sabnzbd_instance=$__all&var-radarr_instance=$__all&var-sonarr_instance=$__all&var-lidarr_instance=$__all&var-readarr_instance=$__all&var-bazarr_instance=$__all&refresh=30s&kiosk
-                height: 800
-
-      - name: Homepage
-        columns:
-          - size: full
-            widgets:
-              - type: iframe
-                source: https://homepage.internal.${SECRET_DOMAIN}
+                source: https://my.${SECRET_DOMAIN
                 height: 800
