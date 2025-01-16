@@ -1,0 +1,66 @@
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: capacitor
+  namespace: flux-system
+spec:
+  targetNamespace: flux-system
+  interval: 1h
+  retryInterval: 2m
+  timeout: 5m
+  wait: true
+  prune: true
+  path: "./"
+  sourceRef:
+    kind: OCIRepository
+    name: capacitor
+    namespace: flux-system
+  patches:
+    - patch: |
+        apiVersion: rbac.authorization.k8s.io/v1
+        kind: ClusterRole
+        metadata:
+          name: capacitor
+          labels:
+            kustomize.toolkit.fluxcd.io/name: capacitor
+            kustomize.toolkit.fluxcd.io/namespace: flux-system
+        rules:
+          - verbs:
+              - get
+              - watch
+              - list
+            apiGroups:
+              - networking.k8s.io
+              - apps
+              - ''
+            resources:
+              - pods
+              - pods/log
+              - ingresses
+              - deployments
+              - services
+              - secrets
+              - events
+              - configmaps
+          - verbs:
+              - get
+              - watch
+              - list
+              - patch
+            apiGroups:
+              - infra.contrib.fluxcd.io
+              - source.toolkit.fluxcd.io
+              - kustomize.toolkit.fluxcd.io
+              - helm.toolkit.fluxcd.io
+            resources:
+              - terraforms
+              - gitrepositories
+              - ocirepositories
+              - buckets
+              - helmrepositories
+              - helmcharts
+              - kustomizations
+              - helmreleases
+      target:
+        kind: ClusterRole
+        name: capacitor

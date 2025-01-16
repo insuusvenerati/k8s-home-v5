@@ -60,4 +60,12 @@ data:
             widgets:
               - type: iframe
                 source: https://my.${SECRET_DOMAIN}
-                height: 800
+                height: 1200
+
+      - name: Homepage
+        columns:
+          - size: full
+            widgets:
+              - type: iframe
+                source: https://homepage.internal.${SECRET_DOMAIN}
+                height: 1200
