@@ -43,8 +43,6 @@ spec:
                 value: "1000"
               - name: TA_HOST
                 value: tubearchivist.internal.${SECRET_DOMAIN}
-              - name: REDIS_HOST
-                value: tubearchivist-redis
               - name: REDIS_CON
                 value: redis://tubearchivist-redis:6379
               - name: ES_URL
