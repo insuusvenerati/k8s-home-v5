@@ -43,6 +43,8 @@ spec:
                 value: tubearchivist.internal.${SECRET_DOMAIN}
               - name: REDIS_HOST
                 value: tubearchivist-redis
+              - name: REDIS_CON
+                value: redis://tubearchivist-redis:6379
               - name: ES_URL
                 value: http://tubearchivist-elasticsearch:9200
             envFrom:
@@ -81,7 +83,7 @@ spec:
         containers:
           redis:
             image:
-              repository: redis/redis-stack-server
+              repository: redis
               tag: latest
     service:
       main:
