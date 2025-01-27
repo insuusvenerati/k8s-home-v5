@@ -17,3 +17,4 @@ resources:
   - ./discord-webhook.sops.yaml
   - ./glances
   - ./bazarr
+  - ./namespace.yaml
