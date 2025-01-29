@@ -22,7 +22,6 @@ resources:
 #  - ./uptrace.yaml
   - ./onechart.yaml
 #  - ./authentik.yaml
-  - ./robusta.yaml
   - ./csi-driver-nfs.yaml
   - ./kubeflame.yaml
   - ./checkmk.yaml
