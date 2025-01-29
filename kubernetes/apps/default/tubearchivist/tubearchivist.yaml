@@ -140,8 +140,8 @@ spec:
     persistence:
       cache:
         enabled: true
-        accessMode: ReadWriteOnce
-        storageClass: openebs-hostpath
+        accessMode: ReadWriteMany
+        storageClass: nfs-client-ssd
         size: 5Gi
       youtube:
         enabled: true
@@ -154,7 +154,7 @@ spec:
         type: persistentVolumeClaim
         accessMode: ReadWriteOnce
         storageClass: openebs-hostpath
-        size: 2Gi
+        size: 5Gi
         advancedMounts:
           elasticsearch:
             elasticsearch:
