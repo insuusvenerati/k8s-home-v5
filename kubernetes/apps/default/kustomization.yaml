@@ -7,6 +7,7 @@ resources:
   - ./overseerr
   - ./nfs-subdir-external-ssd
   - ./tubearchivist
+  - ./tubearchivist-stable
   - ./tautulli
   - ./radarr
   - ./prowlarr

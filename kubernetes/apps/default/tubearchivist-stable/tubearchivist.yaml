@@ -2,7 +2,7 @@
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-  name: tubearchivist
+  name: tubearchivist-stable
   namespace: default
 spec:
   chart:
@@ -17,12 +17,12 @@ spec:
   driftDetection:
     mode: enabled
   interval: 1h0m0s
-  releaseName: tubearchivist
+  releaseName: tubearchivist-stable
   targetNamespace: default
   maxHistory: 2
   values:
     global:
-      fullnameOverride: tubearchivist
+      fullnameOverride: tubearchivist-stable
     controllers:
       main:
         enabled: true
@@ -32,8 +32,7 @@ spec:
           main:
             image:
               repository: bbilly1/tubearchivist
-              tag: unstable
-              pullPolicy: Always
+              tag: v0.4.13
             env:
               - name: TZ
                 value: America/Chicago
@@ -48,7 +47,7 @@ spec:
               - name: ES_URL
                 value: http://tubearchivist-elasticsearch:9200
             envFrom:
-              - secret: ta-creds
+              - secret: ta-stable-creds
       elasticsearch:
         enabled: true
         type: deployment
@@ -68,7 +67,7 @@ spec:
               - name: "xpack.security.enabled"
                 value: "true"
             envFrom:
-              - secret: ta-creds
+              - secret: ta-stable-creds
             resources:
               limits:
                 cpu: 1000m
@@ -117,16 +116,16 @@ spec:
         annotations:
           cert-manager.io/cluster-issuer: letsencrypt-production
         hosts:
-          - host: tubearchivist-unstable.internal.${SECRET_DOMAIN}
+          - host: tubearchivist.internal.${SECRET_DOMAIN}
             paths:
               - path: /
                 service:
                   identifier: main
                   port: http
         tls:
-          - secretName: tubearchivist-tls
+          - secretName: tubearchivist-stable-tls
             hosts:
-              - tubearchivist-unstable.internal.${SECRET_DOMAIN}
+              - tubearchivist.internal.${SECRET_DOMAIN}
     serviceMonitor:
       main:
         enabled: false
