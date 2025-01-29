@@ -27,3 +27,4 @@ resources:
   - ./kubeflame.yaml
   - ./checkmk.yaml
   - ./budibase.yaml
+  - ./robusta.yaml
