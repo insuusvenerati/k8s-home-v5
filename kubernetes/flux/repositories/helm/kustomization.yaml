@@ -27,3 +27,4 @@ resources:
   - ./checkmk.yaml
   - ./budibase.yaml
   - ./robusta.yaml
+  - ./pixie.yaml

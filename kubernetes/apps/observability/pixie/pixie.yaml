@@ -1,0 +1,25 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: pixie
+  namespace: flux-system
+spec:
+  chart:
+    spec:
+      chart: pixie-operator-chart
+      reconcileStrategy: ChartVersion
+      sourceRef:
+        kind: HelmRepository
+        name: pixie
+        namespace: flux-system
+  install:
+    createNamespace: true
+  interval: 1h0m0s
+  releaseName: pixie
+  targetNamespace: pl
+  values:
+    deployOLM: "true"
+    clusterName: "home-kubernetes"
+    customDeployKeySecret: "pixie-secret"
+    cloudAddr: "getcosmic.ai"
