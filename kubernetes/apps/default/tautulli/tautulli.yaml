@@ -74,10 +74,10 @@ spec:
             secretName: tautulli-tls
     persistence:
       config:
-        accessMode: ReadWriteOnce
+        accessMode: ReadWriteMany
         enabled: true
         size: 1Gi
-        storageClass: openebs-hostpath
+        storageClass: nfs-client-ssd
         type: persistentVolumeClaim
     service:
       tautulli:
