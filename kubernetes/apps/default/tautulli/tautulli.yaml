@@ -34,9 +34,9 @@ spec:
               tag: 2.15.1
             probes:
               liveness:
-                enabled: true
+                enabled: false
               readiness:
-                enabled: true
+                enabled: false
               startup:
                 enabled: false
             resources:
