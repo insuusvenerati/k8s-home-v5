@@ -26,10 +26,12 @@ spec:
               PGID: 1000
               PUID: 1000
               TZ: America/Chicago
+              DOCKER_MODS: ghcr.io/themepark-dev/theme.park:tautulli
+              TP_THEME: overseerr
             image:
               pullPolicy: IfNotPresent
-              repository: ghcr.io/tautulli/tautulli
-              tag: v2.15.1
+              repository: linuxserver/tautulli
+              tag: 2.15.1
             probes:
               liveness:
                 enabled: true
