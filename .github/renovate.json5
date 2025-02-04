@@ -16,7 +16,7 @@
   ],
   rebaseWhen: 'conflicted',
   schedule: [
-    'every weekend',
+    '* 0-3 * * *',
   ],
   ignorePaths: [
     '**/*.sops.*',
