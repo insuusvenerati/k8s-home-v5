@@ -28,3 +28,4 @@ resources:
   - ./budibase.yaml
   - ./robusta.yaml
   - ./pixie.yaml
+  - ./longhorn.yaml
