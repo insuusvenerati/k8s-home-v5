@@ -13,7 +13,7 @@ resources:
   - ./prowlarr
   - ./filebrowser
   - ./doplarr
-  - ./homepage
+#  - ./homepage
   - ./flux-alerts.yaml
   - ./discord-webhook.sops.yaml
   - ./glances
