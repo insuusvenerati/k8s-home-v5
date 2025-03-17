@@ -33,7 +33,7 @@ spec:
               value: "0"
             image:
               repository: filebrowser/filebrowser
-              tag: v2.31.2-s6
+              tag: v2.32.0-s6
         enabled: true
         type: deployment
     global:
