@@ -44,7 +44,7 @@ spec:
       config:
         enabled: true
         mountPath: /app/config
-        storageClass: openebs-hostpath
+        storageClass: longhorn
         size: 2Gi
     service:
       main:
