@@ -20,6 +20,7 @@ spec:
       replicas: 1
     persistence:
       defaultClassReplicaCount: 1
+      defaultClass: false
     csi:
       attacherReplicaCount: 1
       provisionerReplicaCount: 1
