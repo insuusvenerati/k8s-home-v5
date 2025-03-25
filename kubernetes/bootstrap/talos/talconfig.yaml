@@ -1,9 +1,9 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/budimanjojo/talhelper/master/pkg/config/schemas/talconfig.json
 ---
 # renovate: datasource=docker depName=ghcr.io/siderolabs/installer
-talosVersion: v1.9.0
+talosVersion: v1.9.5
 # renovate: datasource=docker depName=ghcr.io/siderolabs/kubelet
-kubernetesVersion: v1.32.1
+kubernetesVersion: v1.32.2
 
 clusterName: "home-kubernetes"
 endpoint: https://192.168.1.10:6443
@@ -29,8 +29,15 @@ nodes:
   - hostname: "k8s-controller"
     ipAddress: "192.168.1.11"
     installDisk: "/dev/sda"
-    talosImageURL: factory.talos.dev/installer/7d4c31cbd96db9f90c874990697c523482b2bae27fb4631d5583dcd9c281b1ff
+    talosImageURL: factory.talos.dev/installer/58e4656b31857557c8bad0585e1b2ee53f7446f4218f3fae486aa26d4f6470d8
     controlPlane: true
+    schematic:
+      customization:
+        systemExtensions:
+          officialExtensions:
+            - siderolabs/iscsi-tools
+            - siderolabs/qemu-guest-agent
+            - siderolabs/tailscale
     networkInterfaces:
       - deviceSelector:
           hardwareAddr: "bc:24:11:fe:37:72"
@@ -68,4 +75,3 @@ controlPlane:
     - "@./patches/controller/cluster.yaml"
     - "@./patches/controller/disable-admission-controller.yaml"
     - "@./patches/controller/etcd.yaml"
-
