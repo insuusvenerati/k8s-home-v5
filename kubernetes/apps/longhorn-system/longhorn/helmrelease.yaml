@@ -28,3 +28,10 @@ spec:
       snapshotterReplicaCount: 1
     defaultSettings:
       defaultReplicaCount: 1
+    ingress:
+      enabled: true
+      ingressClassName: internal
+      host: longhorn.internal.${SECRET_DOMAIN}
+      tls: true
+      annotations:
+        cert-manager.io/cluster-issuer: letsencrypt-production
