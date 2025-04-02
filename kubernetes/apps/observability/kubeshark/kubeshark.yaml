@@ -1,0 +1,58 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: kubeshark
+  namespace: observability
+spec:
+  interval: 15m
+  chart:
+    spec:
+      chart: kubeshark
+      version: 52.6
+      sourceRef:
+        kind: HelmRepository
+        name: kubeshark
+        namespace: flux-system
+  targetNamespace: observability
+  install:
+    createNamespace: true
+    remediation:
+      retries: 3
+  upgrade:
+    remediation:
+      retries: 3
+  values:
+    fullnameOverride: "kubeshark"
+    tap:
+      persistentStorage: false
+      storageClass: longhorn
+      storageLimit: 5Gi
+      telemetry:
+        enabled: false
+      misc:
+        jsonTTL: 5m
+        pcapTTL: 10s
+        pcapErrorTTL: 60s
+        trafficSampleRate: 20
+        tcpStreamChannelTimeoutMs: 10000
+        tcpStreamChannelTimeoutShow: false
+        resolutionStrategy: auto
+        duplicateTimeframe: 200ms
+        detectDuplicates: false
+      ingress:
+        enabled: true
+        className: internal
+        annotations:
+          cert-manager.io/cluster-issuer: letsencrypt-production
+        host: &host "kubeshark.internal.${SECRET_DOMAIN}"
+        tls:
+          - hosts:
+              - *host
+            secretName: kubeshark-tls
+    resources:
+      requests:
+        cpu: 10m
+        memory: 50Mi
+      limits:
+        memory: 500Mi

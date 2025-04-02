@@ -16,12 +16,12 @@ resources:
   - ./ingress-nginx.yaml
   - ./k8s-gateway.yaml
   - ./k8s-at-home.yaml
-#  - ./kiali.yaml
+  #  - ./kiali.yaml
   - ./nfs-subdir-external.yaml
   - ./grafana.yaml
-#  - ./uptrace.yaml
+  #  - ./uptrace.yaml
   - ./onechart.yaml
-#  - ./authentik.yaml
+  #  - ./authentik.yaml
   - ./csi-driver-nfs.yaml
   - ./kubeflame.yaml
   - ./checkmk.yaml
@@ -29,3 +29,4 @@ resources:
   - ./robusta.yaml
   - ./pixie.yaml
   - ./longhorn.yaml
+  - ./kubeshark.yaml
