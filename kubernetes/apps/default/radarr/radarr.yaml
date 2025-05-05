@@ -79,9 +79,6 @@ spec:
       radarr:
         annotations:
           cert-manager.io/cluster-issuer: letsencrypt-production
-          nginx.ingress.kubernetes.io/enable-opentelemetry: "true"
-          nginx.ingress.kubernetes.io/otel-service-name: radarr
-          nginx.ingress.kubernetes.io/service-upstream: "false"
         className: internal
         enabled: true
         hosts:
