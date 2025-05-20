@@ -67,7 +67,7 @@ spec:
         accessMode: ReadWriteOnce
         enabled: true
         size: 1Gi
-        storageClass: openebs-hostpath
+        storageClass: longhorn
         type: persistentVolumeClaim
       data:
         enabled: true

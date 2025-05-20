@@ -77,7 +77,7 @@ spec:
         accessMode: ReadWriteMany
         enabled: true
         size: 1Gi
-        storageClass: nfs-client-ssd
+        storageClass: longhorn
         type: persistentVolumeClaim
     service:
       tautulli:
