@@ -14,13 +14,13 @@ spec:
         name: longhorn-repo
         namespace: flux-system
       version: v1.8.1
-  interval: 1m0s
+  interval: 60m0s
   values:
     longhornUI:
       replicas: 1
     persistence:
       defaultClassReplicaCount: 1
-      defaultClass: false
+      defaultClass: true
     csi:
       attacherReplicaCount: 1
       provisionerReplicaCount: 1
@@ -35,3 +35,8 @@ spec:
       tls: true
       annotations:
         cert-manager.io/cluster-issuer: letsencrypt-production
+    networkPolicies:
+      enabled: false
+    metrics:
+      serviceMonitor:
+        enabled: false
