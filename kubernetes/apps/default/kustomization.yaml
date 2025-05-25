@@ -6,16 +6,16 @@ resources:
   - ./sonarr
   - ./overseerr
   - ./nfs-subdir-external-ssd
-  - ./tubearchivist
+  # - ./tubearchivist
 #  - ./tubearchivist-stable
-  - ./tautulli
+  # - ./tautulli
   - ./radarr
   - ./prowlarr
-  - ./filebrowser
+  # - ./filebrowser
   - ./doplarr
 #  - ./homepage
   - ./flux-alerts.yaml
   - ./discord-webhook.sops.yaml
-  - ./glances
+  # - ./glances
   - ./bazarr
   - ./namespace.yaml
