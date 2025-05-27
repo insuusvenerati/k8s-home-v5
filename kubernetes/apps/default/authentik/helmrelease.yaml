@@ -20,6 +20,17 @@ spec:
       envFrom:
         - secretRef:
             name: authentik-secret
+
+    authentik:
+      postgresql:
+        host: authentik-postgresql
+        port: 5432
+        user: authentik
+        password: "${POSTGRES_PASS}"
+        name: authentik
+      redis:
+        host: authentik-redis-master
+
     server:
       ingress:
         enabled: true
@@ -35,6 +46,8 @@ spec:
 
     postgresql:
       enabled: true
+      auth:
+        password: "${POSTGRES_PASS}"
 
     redis:
       enabled: true
