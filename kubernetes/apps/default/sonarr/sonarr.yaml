@@ -52,9 +52,6 @@ spec:
       sonarr:
         annotations:
           cert-manager.io/cluster-issuer: letsencrypt-production
-          nginx.ingress.kubernetes.io/enable-opentelemetry: "true"
-          nginx.ingress.kubernetes.io/otel-service-name: sonarr
-          nginx.ingress.kubernetes.io/service-upstream: "false"
           # Authentik proxy configuration
           nginx.ingress.kubernetes.io/auth-url: http://authentik-outpost.default.svc.cluster.local:9000/outpost.goauthentik.io/auth/nginx
           nginx.ingress.kubernetes.io/auth-signin: https://authentik.internal.stiforr.com/outpost.goauthentik.io/start?rd=$escaped_request_uri
