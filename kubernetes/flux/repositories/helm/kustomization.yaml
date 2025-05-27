@@ -25,8 +25,9 @@ resources:
   - ./csi-driver-nfs.yaml
   - ./kubeflame.yaml
   - ./checkmk.yaml
-  - ./budibase.yaml
-  - ./robusta.yaml
-  - ./pixie.yaml
+  # - ./budibase.yaml
+  # - ./robusta.yaml
+  # - ./pixie.yaml
   - ./longhorn.yaml
   - ./kubeshark.yaml
+  - ./authentik.yaml

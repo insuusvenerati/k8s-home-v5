@@ -19,3 +19,4 @@ resources:
   # - ./glances
   - ./bazarr
   - ./namespace.yaml
+  - ./authentik
