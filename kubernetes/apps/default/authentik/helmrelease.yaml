@@ -20,18 +20,18 @@ spec:
       envFrom:
         - secretRef:
             name: authentik-secret
-
-    ingress:
-      enabled: true
-      ingressClassName: internal
-      annotations:
-        cert-manager.io/cluster-issuer: letsencrypt-production
-      hosts:
-        - auth.internal.${SECRET_DOMAIN}
-      tls:
-        - hosts:
-            - auth.internal.${SECRET_DOMAIN}
-          secretName: authentik-tls
+    server:
+      ingress:
+        enabled: true
+        ingressClassName: internal
+        annotations:
+          cert-manager.io/cluster-issuer: letsencrypt-production
+        hosts:
+          - auth.internal.${SECRET_DOMAIN}
+        tls:
+          - hosts:
+              - auth.internal.${SECRET_DOMAIN}
+            secretName: authentik-tls
 
     postgresql:
       enabled: true
