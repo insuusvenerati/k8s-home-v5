@@ -22,14 +22,7 @@ spec:
             name: authentik-secret
 
     authentik:
-      postgresql:
-        host: authentik-postgresql
-        port: 5432
-        user: authentik
-        password: "${POSTGRES_PASS}"
-        name: authentik
-      redis:
-        host: authentik-redis-master
+      enabled: true
 
     server:
       ingress:
@@ -47,7 +40,16 @@ spec:
     postgresql:
       enabled: true
       auth:
-        password: "${POSTGRES_PASS}"
+        existingSecret: authentik-secret
+        secretKeys:
+          adminPasswordKey: POSTGRES_PASSWORD
+          userPasswordKey: POSTGRES_PASSWORD
+      persistence:
+        enabled: true
+        storageClass: longhorn
+        accessModes:
+          - ReadWriteOnce
+        size: 10Gi
 
     redis:
       enabled: true
