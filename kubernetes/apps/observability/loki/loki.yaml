@@ -34,5 +34,21 @@ spec:
       replicas: 1
     backend:
       replicas: 1
+    gateway:
+      enabled: true
+      ingress:
+        enabled: true
+        ingressClassName: internal
+        annotations:
+          cert-manager.io/cluster-issuer: letsencrypt-production
+        hosts:
+          - host: loki.internal.${SECRET_DOMAIN}
+            paths:
+              - path: /
+                pathType: Prefix
+        tls:
+          - secretName: loki-gateway-tls
+            hosts:
+              - loki.internal.${SECRET_DOMAIN}
     minio:
       enabled: true
