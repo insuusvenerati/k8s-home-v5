@@ -18,5 +18,5 @@ spec:
   values:
     loki:
       auth_enabled: false
-      minio:
-        enabled: true
+    minio:
+      enabled: true
