@@ -73,10 +73,10 @@ spec:
         global-auth-cache-duration: "200 202 401 5m"
         global-auth-always-set-cookie: "true"
         no-auth-locations: "/.well-known/acme-challenge,/outpost.goauthentik.io"
-        location-snippet: |
-          if ($host ~ ".*rr\.internal\.stiforr\.com$") {
-            set $do_auth "true";
-          }
+        # location-snippet: |
+        #   if ($host ~ ".*rr\.internal\.stiforr\.com$") {
+        #     set $do_auth "true";
+        #   }
       metrics:
         enabled: true
         serviceMonitor:
