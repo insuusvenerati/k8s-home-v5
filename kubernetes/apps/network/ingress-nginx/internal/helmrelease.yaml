@@ -63,11 +63,13 @@ spec:
         global-auth-signin: "https://auth.internal.${SECRET_DOMAIN}/outpost.goauthentik.io/start?rd=$scheme://$http_host$escaped_request_uri"
         global-auth-response-headers: "Set-Cookie,X-authentik-username,X-authentik-groups,X-authentik-entitlements,X-authentik-email,X-authentik-name,X-authentik-uid"
         global-auth-snippet: |
-          proxy_set_header X-Forwarded-Host $http_host;
-          auth_request_set $auth_cookie $upstream_http_set_cookie;
-          add_header Set-Cookie $auth_cookie always;
-          auth_request_set $auth_user $upstream_http_x_authentik_username;
-          proxy_set_header X-Auth-User $auth_user;
+          if ($host ~ ".*rr\.internal\.stiforr\.com$") {
+            proxy_set_header X-Forwarded-Host $http_host;
+            auth_request_set $auth_cookie $upstream_http_set_cookie;
+            add_header Set-Cookie $auth_cookie always;
+            auth_request_set $auth_user $upstream_http_x_authentik_username;
+            proxy_set_header X-Auth-User $auth_user;
+          }
         global-auth-cache-key: "$host$cookie_authentik_session"
         global-auth-cache-duration: "200 202 401 5m"
         global-auth-always-set-cookie: "true"
@@ -75,9 +77,6 @@ spec:
         location-snippet: |
           if ($host ~ ".*rr\.internal\.stiforr\.com$") {
             set $do_auth "true";
-          }
-          if ($host = "auth.internal.stiforr.com") {
-            set $do_auth "";
           }
       metrics:
         enabled: true
