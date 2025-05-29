@@ -76,6 +76,9 @@ spec:
           if ($host ~ ".*rr\.internal\.stiforr\.com$") {
             set $do_auth "true";
           }
+          if ($host = "auth.internal.stiforr.com") {
+            set $do_auth "";
+          }
       metrics:
         enabled: true
         serviceMonitor:
