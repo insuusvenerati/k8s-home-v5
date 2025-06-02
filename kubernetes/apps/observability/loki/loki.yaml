@@ -15,3 +15,23 @@ spec:
       version: 2.10.2
   interval: 1h0m0s
   targetNamespace: observability
+  values:
+    promtail:
+      sidecar:
+        configReloader:
+          enabled: true
+          
+    loki:
+      persistence:
+        enabled: true
+        storageClassName: longhorn
+      ingress:
+        enabled: true
+        annotations:
+          cert-manager.io/cluster-issuer: letsencrypt-production
+        hosts:
+          - loki.internal.${SECRET_DOMAIN}
+        tls:
+          - secretName: loki-tls
+            hosts:
+              - loki.internal.${SECRET_DOMAIN}
