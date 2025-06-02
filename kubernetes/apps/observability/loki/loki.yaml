@@ -16,6 +16,7 @@ spec:
   interval: 1h0m0s
   targetNamespace: observability
   values:
+    deploymentMode: SingleBinary
     loki:
       auth_enabled: false
       limits_config:
