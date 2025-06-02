@@ -30,6 +30,9 @@ spec:
           cert-manager.io/cluster-issuer: letsencrypt-production
         hosts:
           - host: loki.internal.${SECRET_DOMAIN}
+            paths:
+              - path: /
+                pathType: Prefix
         tls:
           - secretName: loki-tls
             hosts:
