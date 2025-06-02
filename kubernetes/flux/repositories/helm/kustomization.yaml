@@ -31,3 +31,4 @@ resources:
   - ./longhorn.yaml
   - ./kubeshark.yaml
   - ./authentik.yaml
+  - ./netdata.yaml
