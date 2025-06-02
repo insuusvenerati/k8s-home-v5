@@ -36,6 +36,8 @@ spec:
         configReloader:
           enabled: true
     loki:
+      image:
+        tag: 3.5.1
       persistence:
         enabled: true
         storageClassName: longhorn
