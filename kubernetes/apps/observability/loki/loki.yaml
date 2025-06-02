@@ -6,13 +6,13 @@ metadata:
 spec:
   chart:
     spec:
-      chart: loki
+      chart: loki-simple-scalable
       reconcileStrategy: ChartVersion
       sourceRef:
         kind: HelmRepository
         name: grafana
         namespace: flux-system
-      version: 6.30.1
+      version: 1.8.11
   interval: 1h0m0s
   targetNamespace: observability
   values:
