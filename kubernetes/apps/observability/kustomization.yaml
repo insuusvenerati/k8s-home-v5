@@ -8,3 +8,4 @@ resources:
   #  - ./pixie
   - ./kubeshark
   - ./loki
+  - ./netdata
