@@ -12,7 +12,7 @@ spec:
         kind: HelmRepository
         name: grafana
         namespace: flux-system
-      version: 1.8.11
+      version: 6.30.1
   interval: 1h0m0s
   targetNamespace: observability
   values:
