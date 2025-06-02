@@ -16,6 +16,19 @@ spec:
   interval: 1h0m0s
   targetNamespace: observability
   values:
+    grafana:
+      enabled: true
+      ingress:
+        enabled: true
+        ingressClassName: internal
+        annotations:
+          cert-manager.io/cluster-issuer: letsencrypt-production
+        hosts:
+          - grafana.internal.${SECRET_DOMAIN}
+        tls:
+          - secretName: grafana-tls
+            hosts:
+              - grafana.internal.${SECRET_DOMAIN}
     promtail:
       sidecar:
         configReloader:
