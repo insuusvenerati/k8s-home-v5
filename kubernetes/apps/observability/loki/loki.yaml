@@ -31,8 +31,7 @@ spec:
         hosts:
           - host: loki.internal.${SECRET_DOMAIN}
             paths:
-              - path: /
-                pathType: Prefix
+              - /
         tls:
           - secretName: loki-tls
             hosts:
