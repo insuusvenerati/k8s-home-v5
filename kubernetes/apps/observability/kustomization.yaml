@@ -9,3 +9,4 @@ resources:
   - ./kubeshark
   - ./loki
   - ./netdata
+  - ./k8s-monitoring
