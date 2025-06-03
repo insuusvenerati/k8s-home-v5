@@ -16,6 +16,15 @@ spec:
   interval: 24h0m0s
   targetNamespace: observability
   values:
+    ingress:
+      enabled: true
+      ingressClassName: internal
+      hosts:
+        - loki.internal.${SECRET_DOMAIN}
+      tls:
+        - hosts:
+            - loki.internal.${SECRET_DOMAIN}
+          secretName: loki-tls
     loki:
       auth_enabled: false
       commonConfig:
@@ -50,21 +59,10 @@ spec:
     deploymentMode: SingleBinary
     singleBinary:
       replicas: 1
-      # resources:
-      #   limits:
-      #     cpu: 4
-      #     memory: 4Gi
-      #   requests:
-      #     cpu: 2
-      #     memory: 2Gi
-      # extraEnv:
-      #   # Keep a little bit lower than memory limits
-      #   - name: GOMEMLIMIT
-      #     value: 3750MiB
 
     chunksCache:
       # default is 500MB, with limited memory keep this smaller
-      writebackSizeLimit: 10MB
+      writebackSizeLimit: 100MB
 
 
     # Zero out replica counts of other deployment modes
