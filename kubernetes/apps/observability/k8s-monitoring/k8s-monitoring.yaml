@@ -31,6 +31,10 @@ spec:
       namespaces:
         - default
         - observability
+        - network
+        - kube-system
+        - flux-system
+        - cert-manager
 
     nodeLogs:
       enabled: false
@@ -45,6 +49,10 @@ spec:
       namespaces:
         - default
         - observability
+        - network
+        - kube-system
+        - flux-system
+        - cert-manager
 
     # Collectors
     alloy-singleton:
