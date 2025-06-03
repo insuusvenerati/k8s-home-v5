@@ -1,0 +1,107 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+# Kubernetes Rules
+
+## Resource Management
+
+### Get Resources
+description: Get information about Kubernetes resources
+examples: |
+  - Show me the pods in the default namespace
+  - Get all deployments
+  - List services across all namespaces
+  - Describe the nginx deployment
+tools: |
+  - mcp_kubernetes_kubectl_get
+  - mcp_kubernetes_kubectl_describe
+  - mcp_kubernetes_kubectl_list
+
+### Deployment Operations
+description: Manage Kubernetes deployments including scaling and rollouts
+examples: |
+  - Scale the frontend deployment to 3 replicas
+  - Rollback the last deployment
+  - Check deployment status
+  - Update deployment image
+tools: |
+  - mcp_kubernetes_kubectl_scale
+  - mcp_kubernetes_kubectl_rollout
+  - mcp_kubernetes_kubectl_patch
+
+### Pod Operations
+description: Work with Kubernetes pods including logs and port-forwarding
+examples: |
+  - Show logs from the auth pod
+  - Forward port 8080 to the web pod
+  - Get pod events
+  - List pods with errors
+tools: |
+  - mcp_kubernetes_kubectl_logs
+  - mcp_kubernetes_port_forward
+  - mcp_kubernetes_kubectl_get
+
+### Helm Operations
+description: Manage Helm charts and releases
+examples: |
+  - Install nginx chart
+  - Upgrade prometheus chart
+  - List helm releases
+tools: |
+  - mcp_kubernetes_install_helm_chart
+  - mcp_kubernetes_upgrade_helm_chart
+
+### Context Management
+description: Manage and switch between Kubernetes contexts
+examples: |
+  - Show current context
+  - Switch to production context
+  - List available contexts
+tools: |
+  - mcp_kubernetes_kubectl_context
+
+### Resource Creation
+description: Create and apply Kubernetes resources
+examples: |
+  - Create a new namespace
+  - Apply a deployment manifest
+  - Create a configmap
+tools: |
+  - mcp_kubernetes_kubectl_create
+  - mcp_kubernetes_kubectl_apply
+
+### API Resources
+description: Explore Kubernetes API resources and documentation
+examples: |
+  - Explain pod spec
+  - Show available API resources
+  - Get deployment schema
+tools: |
+  - mcp_kubernetes_explain_resource
+  - mcp_kubernetes_list_api_resources
+
+## Best Practices
+
+### Security
+description: Follow Kubernetes security best practices
+examples: |
+  - Use non-root containers
+  - Apply RBAC policies
+  - Set resource limits
+tools: |
+  - mcp_kubernetes_kubectl_create
+  - mcp_kubernetes_kubectl_apply
+
+### Monitoring
+description: Monitor cluster and application health
+examples: |
+  - Check pod health
+  - Monitor resource usage
+  - View application logs
+tools: |
+  - mcp_kubernetes_kubectl_get
+  - mcp_kubernetes_kubectl_logs
+  - mcp_kubernetes_kubectl_describe
+
