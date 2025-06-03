@@ -50,17 +50,17 @@ spec:
     deploymentMode: SingleBinary
     singleBinary:
       replicas: 1
-      resources:
-        limits:
-          cpu: 4
-          memory: 4Gi
-        requests:
-          cpu: 2
-          memory: 2Gi
-      extraEnv:
-        # Keep a little bit lower than memory limits
-        - name: GOMEMLIMIT
-          value: 3750MiB
+      # resources:
+      #   limits:
+      #     cpu: 4
+      #     memory: 4Gi
+      #   requests:
+      #     cpu: 2
+      #     memory: 2Gi
+      # extraEnv:
+      #   # Keep a little bit lower than memory limits
+      #   - name: GOMEMLIMIT
+      #     value: 3750MiB
 
     chunksCache:
       # default is 500MB, with limited memory keep this smaller
