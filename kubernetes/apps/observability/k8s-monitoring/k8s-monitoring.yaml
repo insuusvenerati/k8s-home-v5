@@ -22,7 +22,7 @@ spec:
     destinations:
       - name: loki
         type: loki
-        url: http://loki-gateway.observability.svc.cluster.local/loki/api/v1/push
+        url: http://observability-loki-gateway.observability.svc.cluster.local/loki/api/v1/push
 
 
     clusterEvents:
