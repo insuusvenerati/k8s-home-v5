@@ -29,8 +29,8 @@ spec:
       enabled: true
       collector: alloy-logs
       namespaces:
-        - meta
-        - prod
+        - default
+        - observability
 
     nodeLogs:
       enabled: false
