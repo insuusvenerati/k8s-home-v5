@@ -35,7 +35,7 @@ spec:
                 value: overseerr
             image:
               repository: linuxserver/prowlarr
-              tag: 1.36.3
+              tag: 1.37.0
         enabled: true
         type: deployment
     global:
