@@ -8,5 +8,5 @@ resources:
   #  - ./pixie
   - ./kubeshark
   - ./loki
-  - ./netdata
+  # - ./netdata
   - ./k8s-monitoring
