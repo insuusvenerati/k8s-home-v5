@@ -42,6 +42,7 @@ spec:
       web:
         port: 8000
       websecure:
+        asDefault: true
         port: 8443
 
     persistence:
