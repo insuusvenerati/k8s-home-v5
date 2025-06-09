@@ -36,3 +36,23 @@ spec:
     ingressRoute:
       dashboard:
         enabled: true
+
+    ports:
+      web:
+        port: 8000
+      websecure:
+        port: 8443
+
+    persistence:
+      enabled: true
+      name: traefik-data
+      storageClass: longhorn
+      size: 256Mi
+      volumeName: traefik-data
+    
+    providers:
+      kubernetesCRD:
+        enabled: true
+        allowCrossNamespace: true
+      kubernetesIngress:
+        enabled: true
