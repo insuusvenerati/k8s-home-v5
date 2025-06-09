@@ -16,6 +16,7 @@ resources:
   - ./ingress-nginx.yaml
   - ./k8s-gateway.yaml
   - ./k8s-at-home.yaml
+  - ./traefik.yaml
   #  - ./kiali.yaml
   - ./nfs-subdir-external.yaml
   - ./grafana.yaml
