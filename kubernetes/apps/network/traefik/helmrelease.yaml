@@ -9,70 +9,26 @@ spec:
   chart:
     spec:
       chart: traefik
-      version: "26.0.0"  # Latest stable version
+      version: 36.0.0
       sourceRef:
         kind: HelmRepository
         name: traefik
         namespace: flux-system
       interval: 30m
+  targetNamespace: network
   values:
     deployment:
       replicas: 1
-    
-    # Enable the dashboard
-    dashboard:
-      enabled: true
-      
-    # Configure ports
-    ports:
-      web:
-        port: 80
-        expose: true
-        exposedPort: 80
-        protocol: TCP
-      websecure:
-        port: 443
-        expose: true
-        exposedPort: 443
-        protocol: TCP
-        
-    # Configure TLS
-    tlsOptions:
-      default:
-        minVersion: VersionTLS12
-        maxVersion: VersionTLS13
-        
-    # Configure service
     service:
-      enabled: true
-      type: LoadBalancer
-      
-    # Configure logs
-    logs:
-      general:
-        level: INFO
-      access:
+      annotations:
+        lbipam.cilium.io/ips: "192.168.1.12"
+    ingressClass:
+      isDefaultClass: false
+      name: "traefik"
+    gateway:
+      enable: false
+    gatewayClass:
+      enable: false
+    ingressRoute:
+      dashboard:
         enabled: true
-        
-    # Configure metrics
-    metrics:
-      prometheus:
-        enabled: true
-        
-    # Configure resources
-    resources:
-      requests:
-        cpu: "100m"
-        memory: "100Mi"
-      limits:
-        cpu: "300m"
-        memory: "300Mi"
-        
-    # Configure security
-    securityContext:
-      capabilities:
-        drop:
-          - ALL
-      readOnlyRootFilesystem: true
-      runAsNonRoot: true
-      runAsUser: 65532 
