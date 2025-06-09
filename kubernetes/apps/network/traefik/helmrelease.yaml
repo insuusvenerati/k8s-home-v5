@@ -45,10 +45,8 @@ spec:
 
     persistence:
       enabled: true
-      name: traefik-data
       storageClass: longhorn
       size: 256Mi
-      volumeName: traefik-data
     
     providers:
       kubernetesCRD:
