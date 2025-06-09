@@ -26,9 +26,9 @@ spec:
       isDefaultClass: false
       name: "traefik"
     gateway:
-      enable: false
+      enabled: false
     gatewayClass:
-      enable: false
+      enabled: false
     ingressRoute:
       dashboard:
         enabled: true
