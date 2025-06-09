@@ -20,6 +20,7 @@ spec:
     crds: CreateReplace
   upgrade:
     crds: CreateReplace
+  releaseName: traefik
   values:
     deployment:
       replicas: 1
