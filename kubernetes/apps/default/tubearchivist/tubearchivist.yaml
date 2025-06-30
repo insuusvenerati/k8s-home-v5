@@ -32,7 +32,7 @@ spec:
           main:
             image:
               repository: bbilly1/tubearchivist
-              tag: v0.5.4
+              tag: testing
               pullPolicy: Always
             env:
               - name: TZ
@@ -42,7 +42,7 @@ spec:
               - name: PGID
                 value: "1000"
               - name: TA_HOST
-                value: https://tubearchivist-unstable.internal.${SECRET_DOMAIN}
+                value: https://tubearchivist.internal.${SECRET_DOMAIN}
               - name: REDIS_CON
                 value: redis://tubearchivist-redis:6379
               - name: ES_URL
@@ -117,7 +117,7 @@ spec:
         annotations:
           cert-manager.io/cluster-issuer: letsencrypt-production
         hosts:
-          - host: tubearchivist-unstable.internal.${SECRET_DOMAIN}
+          - host: tubearchivist.internal.${SECRET_DOMAIN}
             paths:
               - path: /
                 service:
@@ -126,7 +126,7 @@ spec:
         tls:
           - secretName: tubearchivist-tls
             hosts:
-              - tubearchivist-unstable.internal.${SECRET_DOMAIN}
+              - tubearchivist.internal.${SECRET_DOMAIN}
     serviceMonitor:
       main:
         enabled: false
@@ -141,7 +141,7 @@ spec:
       cache:
         enabled: true
         accessMode: ReadWriteMany
-        storageClass: nfs-client-ssd
+        storageClass: longhorn
         size: 5Gi
       youtube:
         enabled: true
@@ -153,7 +153,7 @@ spec:
         enabled: true
         type: persistentVolumeClaim
         accessMode: ReadWriteOnce
-        storageClass: openebs-hostpath
+        storageClass: longhorn
         size: 5Gi
         advancedMounts:
           elasticsearch:
@@ -164,7 +164,7 @@ spec:
         enabled: true
         type: persistentVolumeClaim
         accessMode: ReadWriteOnce
-        storageClass: openebs-hostpath
+        storageClass: longhorn
         size: 1Gi
         advancedMounts:
           redis:
