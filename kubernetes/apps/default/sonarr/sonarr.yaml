@@ -52,7 +52,7 @@ spec:
       sonarr:
         annotations:
           cert-manager.io/cluster-issuer: letsencrypt-production
-          traefik.ingress.kubernetes.io/router.middlewares: default-ak-outpost-authentik-embedded-outpost@kubernetescrd
+          # traefik.ingress.kubernetes.io/router.middlewares: default-ak-outpost-authentik-embedded-outpost@kubernetescrd
         className: traefik
         enabled: true
         hosts:
