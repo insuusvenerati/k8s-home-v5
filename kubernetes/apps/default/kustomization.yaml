@@ -12,11 +12,11 @@ resources:
   - ./radarr
   - ./prowlarr
   # - ./filebrowser
-  - ./doplarr
+  #- ./doplarr
 #  - ./homepage
-  - ./flux-alerts.yaml
-  - ./discord-webhook.sops.yaml
+ # - ./flux-alerts.yaml
+  #- ./discord-webhook.sops.yaml
   # - ./glances
-  - ./bazarr
+ # - ./bazarr
   - ./namespace.yaml
-  - ./authentik
+ # - ./authentik
