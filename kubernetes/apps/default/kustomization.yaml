@@ -6,9 +6,9 @@ resources:
   - ./sonarr
   - ./overseerr
   - ./nfs-subdir-external-ssd
-  # - ./tubearchivist
+  - ./tubearchivist
 #  - ./tubearchivist-stable
-  # - ./tautulli
+  - ./tautulli
   - ./radarr
   - ./prowlarr
   # - ./filebrowser
