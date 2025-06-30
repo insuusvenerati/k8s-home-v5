@@ -32,7 +32,7 @@ spec:
           main:
             image:
               repository: bbilly1/tubearchivist
-              tag: testing
+              tag: unstable
               pullPolicy: Always
             env:
               - name: TZ
