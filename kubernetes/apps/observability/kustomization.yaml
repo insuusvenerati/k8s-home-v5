@@ -6,7 +6,7 @@ resources:
   - ./prometheus-operator-crds/ks.yaml
   # - ./robusta
   #  - ./pixie
-  - ./kubeshark
-  - ./loki
+  #- ./kubeshark
+  #- ./loki
   # - ./netdata
-  - ./k8s-monitoring
+  #- ./k8s-monitoring
