@@ -76,6 +76,9 @@ spec:
               requests:
                 cpu: 500m
                 memory: 512Mi
+            securityContext:
+              runAsUser: 1000
+              fsGroup: 1000
       redis:
         enabled: true
         type: deployment
