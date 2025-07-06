@@ -142,7 +142,7 @@ spec:
       cache:
         enabled: true
         accessMode: ReadWriteMany
-        storageClass: nfs-client-ssd
+        storageClass: longhorn
         size: 5Gi
       youtube:
         enabled: true
@@ -154,7 +154,7 @@ spec:
         enabled: true
         type: persistentVolumeClaim
         accessMode: ReadWriteOnce
-        storageClass: openebs-hostpath
+        storageClass: longhorn
         size: 5Gi
         advancedMounts:
           elasticsearch:
@@ -165,7 +165,7 @@ spec:
         enabled: true
         type: persistentVolumeClaim
         accessMode: ReadWriteOnce
-        storageClass: openebs-hostpath
+        storageClass: longhorn
         size: 1Gi
         advancedMounts:
           redis:
