@@ -45,7 +45,7 @@ spec:
                 value: overseerr
             image:
               repository: linuxserver/radarr
-              tag: 5.27.1-nightly
+              tag: 5.27.2-nightly
             probes:
               liveness:
                 enabled: true
