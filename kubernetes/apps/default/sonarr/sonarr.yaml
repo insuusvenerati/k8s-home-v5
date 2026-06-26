@@ -37,7 +37,7 @@ spec:
                 value: overseerr
             image:
               repository: linuxserver/sonarr
-              tag: 4.0.15
+              tag: 4.0.19
             resources:
               requests:
                 cpu: 100m
